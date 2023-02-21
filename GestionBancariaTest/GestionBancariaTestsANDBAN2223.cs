@@ -20,7 +20,23 @@ namespace GestionBancariaTest
             miApp.RealizarReintegro(reintegro);
             Assert.AreEqual(saldoEsperado, miApp.ObtenerSaldo(), 0.001,
             "Se produjo un error al realizar el reintegro, saldo" +
-            "incorrecto."); // obtenerSaldo() No existe!
+            "incorrecto.");
+        }
+
+        [TestMethod]
+        public void ValidarIngreso()
+        {
+            // preparación del caso de prueba
+            double saldoInicial = 1000;
+            double ingreso = 250;
+            double saldoEsperado = 1250;
+
+            GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
+            // Método a probar
+            miApp.RealizarIngreso(ingreso);
+            Assert.AreEqual(saldoEsperado, miApp.ObtenerSaldo(), 0.001,
+            "Se produjo un error al realizar el ingreso, saldo" +
+            "incorrecto.");
         }
     }
 }
