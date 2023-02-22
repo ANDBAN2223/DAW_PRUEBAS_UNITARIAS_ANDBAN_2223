@@ -5,6 +5,7 @@ using GestionBancariaAppNS;
 namespace GestionBancariaTest
 {
     [TestClass]
+    // ANDBAN2223
     public class GestionBancariaTestsANDBAN2223
     {
         [TestMethod]
@@ -26,13 +27,11 @@ namespace GestionBancariaTest
         [TestMethod]
         public void ValidarIngreso()
         {
-            // preparación del caso de prueba
             double saldoInicial = 1000;
             double ingreso = 250;
             double saldoEsperado = 1250;
 
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
-            // Método a probar
             miApp.RealizarIngreso(ingreso);
             Assert.AreEqual(saldoEsperado, miApp.ObtenerSaldo(), 0.001,
             "Se produjo un error al realizar el ingreso, saldo" +
@@ -40,47 +39,87 @@ namespace GestionBancariaTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void validarReintegroCantidadNoValida()
         {
             double saldoInicial = 1000;
             double reintegro = -1;
 
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
-            miApp.RealizarReintegro(reintegro);
+            try
+            {
+                miApp.RealizarReintegro(reintegro);
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                // assert
+                StringAssert.Contains(exception.Message,
+                GestionBancariaApp.ERR_CANTIDAD_NO_VALIDA);
+                return;
+            }
+            Assert.Fail("Error. Se debía haber producido una excepción.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void validarReintegroCantidad2NoValida()
         {
             double saldoInicial = 1000;
             double reintegro = 1001;
 
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
-            miApp.RealizarReintegro(reintegro);
+            try
+            {
+                miApp.RealizarReintegro(reintegro);
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                // assert
+                StringAssert.Contains(exception.Message,
+                GestionBancariaApp.ERR_SALDO_INSUFICIENTE);
+                return;
+            }
+            Assert.Fail("Error. Se debía haber producido una excepción.");
         }
-        // ANDBAN2223 Metodo probar reintegrar 0
+
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void validarReintegroCantidad3NoValida()
         {
             double saldoInicial = 1000;
             double reintegro = 0;
 
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
-            miApp.RealizarReintegro(reintegro);
+            try
+            {
+                miApp.RealizarReintegro(reintegro);
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                // assert
+                StringAssert.Contains(exception.Message,
+                GestionBancariaApp.ERR_CANTIDAD_NO_VALIDA);
+                return;
+            }
+            Assert.Fail("Error. Se debía haber producido una excepción.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void validarIngresoCantidadNoValida()
         {
             double saldoInicial = 1000;
             double ingreso = -1;
 
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
-            miApp.RealizarIngreso(ingreso);
+            try
+            {
+                miApp.RealizarIngreso(ingreso);
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                // assert
+                StringAssert.Contains(exception.Message,
+                GestionBancariaApp.ERR_CANTIDAD_NO_VALIDA);
+                return;
+            }
+            Assert.Fail("Error. Se debía haber producido una excepción.");
         }
 
     }
