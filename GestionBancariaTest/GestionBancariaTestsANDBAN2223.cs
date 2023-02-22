@@ -38,5 +38,39 @@ namespace GestionBancariaTest
             "Se produjo un error al realizar el ingreso, saldo" +
             "incorrecto.");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void validarReintegroCantidadNoValida()
+        {
+            double saldoInicial = 1000;
+            double reintegro = -1;
+
+            GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
+            miApp.RealizarReintegro(reintegro);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void validarReintegroCantidad2NoValida()
+        {
+            double saldoInicial = 1000;
+            double reintegro = 1001;
+
+            GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
+            miApp.RealizarReintegro(reintegro);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void validarIngresoCantidadNoValida()
+        {
+            double saldoInicial = 1000;
+            double ingreso = -1;
+
+            GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
+            miApp.RealizarIngreso(ingreso);
+        }
+
     }
 }
