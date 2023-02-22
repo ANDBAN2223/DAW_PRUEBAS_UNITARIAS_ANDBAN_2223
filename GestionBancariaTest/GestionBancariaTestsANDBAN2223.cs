@@ -60,6 +60,17 @@ namespace GestionBancariaTest
             GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
             miApp.RealizarReintegro(reintegro);
         }
+        // ANDBAN2223 Metodo probar reintegrar 0
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void validarReintegroCantidad3NoValida()
+        {
+            double saldoInicial = 1000;
+            double reintegro = 0;
+
+            GestionBancariaApp miApp = new GestionBancariaApp(saldoInicial);
+            miApp.RealizarReintegro(reintegro);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]

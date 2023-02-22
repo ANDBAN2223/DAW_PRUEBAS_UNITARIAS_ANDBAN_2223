@@ -15,7 +15,7 @@ namespace GestionBancariaAppNS
         private double saldo;  
         const int ERR_CANTIDAD_NO_VALIDA = 1;
         const int ERR_SALDO_INSUFICIENTE = 2;
-
+        // ANDBAN2223
         public GestionBancariaApp(double saldo = 0)
         {
             InitializeComponent();
